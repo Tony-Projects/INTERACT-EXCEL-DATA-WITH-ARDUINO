@@ -1,0 +1,43 @@
+#include <SoftwareSerial.h>
+
+#define RX 4
+
+#define TX 5
+
+SoftwareSerial GM65(RX, TX);
+
+String bufferGM65 = "";
+
+
+
+void setup()
+
+{
+
+  GM65.begin(9600);
+
+  Serial.begin(115200);
+
+}
+
+
+
+void loop()
+
+{
+
+  while (GM65.available()>0){
+
+    bufferGM65 = GM65.readString();
+
+  }
+
+  if(bufferGM65.length()>0){
+
+    Serial.println(bufferGM65); 
+
+    bufferGM65="";
+
+  }
+
+}
